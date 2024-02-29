@@ -1,0 +1,77 @@
+// Copyright (C) 2024 Yucheng Liu. Under the GNU AGPL 3.0 License.
+// GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
+
+/*
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+*/
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    namespace 'com.LiuYucheng.VRSetupAndroid'
+
+    defaultConfig {
+        applicationId "com.LiuYucheng.VRSetupAndroid"
+        minSdkVersion 29
+        versionCode  1
+        versionName  "0.1.0"
+
+        shaders {
+            glslcArgs.addAll(['-c', '-g'])
+        }
+        externalNativeBuild {
+            cmake {
+                abiFilters "armeabi-v7a","arm64-v8a"
+                arguments '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+	
+    sourceSets {
+        main {
+            java.srcDirs    = ['src/main/java']
+            jni.srcDirs     = ['src/main/cpp/vr_setup']
+            jniLibs.srcDirs = ['libs/openxr_loader']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
+	
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs/openxr_loader', include: ['*.jar','*.aar'])
+}
