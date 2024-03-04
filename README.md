@@ -2,9 +2,9 @@
 
 - An "empty" Android Studio project template for OpenXR Native VR development on Pico 4 Pro.
 
-- Based on the OpenXR [`hello_xr`](https://github.com/KhronosGroup/OpenXR-SDK-Sourcehttps://github.com/KhronosGroup/OpenXR-SDK-Source) sample.
+- Based on the OpenXR [`hello_xr`](https://github.com/KhronosGroup/OpenXR-SDK-Source) sample.
 
-- Behaves the same as the OpenXR [`hello_xr`](https://github.com/KhronosGroup/OpenXR-SDK-Sourcehttps://github.com/KhronosGroup/OpenXR-SDK-Source) sample.
+- Behaves the same as the OpenXR [`hello_xr`](https://github.com/KhronosGroup/OpenXR-SDK-Source) sample.
 
 - Works on Pico 4 Pro.
 
