@@ -23,8 +23,10 @@ allprojects {
 
 apply plugin: 'com.android.application'
 
-def appVersionCode = 2
-def appVersionName = "0.2.0"
+def appPackageName = "com.LiuYucheng.VRSetupAndroid"
+
+def appVersionCode = 3
+def appVersionName = "0.3.0"
 
 def cppAppName = "vr_setup"
 def cppLoaderName = "openxr_loader"
@@ -34,10 +36,10 @@ def cppLoaderPath = "libs/" + cppLoaderName
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
-    namespace 'com.LiuYucheng.VRSetupAndroid'
+    namespace appPackageName
 
     defaultConfig {
-        applicationId "com.LiuYucheng.VRSetupAndroid"
+        applicationId appPackageName
         minSdkVersion 29
         versionCode  appVersionCode
         versionName  appVersionName
