@@ -25,8 +25,8 @@ apply plugin: 'com.android.application'
 
 def appPackageName = "com.LiuYucheng.VRSetupAndroid"
 
-def appVersionCode = 3
-def appVersionName = "0.3.0"
+def appVersionCode = 4
+def appVersionName = "0.3.1"
 
 def cppAppName = "vr_setup"
 def cppLoaderName = "openxr_loader"
