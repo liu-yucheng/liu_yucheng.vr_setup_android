@@ -2,7 +2,6 @@
 // GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
 
 /*
-
 buildscript {
     repositories {
         google()
@@ -20,10 +19,17 @@ allprojects {
         mavenCentral()
     }
 }
-
 */
 
 apply plugin: 'com.android.application'
+
+def appVersionCode = 2
+def appVersionName = "0.2.0"
+
+def cppAppName = "vr_setup"
+def cppLoaderName = "openxr_loader"
+def cppAppPath = "src/main/cpp/" + cppAppName
+def cppLoaderPath = "libs/" + cppLoaderName
 
 android {
     compileSdkVersion 29
@@ -33,19 +39,19 @@ android {
     defaultConfig {
         applicationId "com.LiuYucheng.VRSetupAndroid"
         minSdkVersion 29
-        versionCode  1
-        versionName  "0.1.0"
+        versionCode  appVersionCode
+        versionName  appVersionName
 
         shaders {
             glslcArgs.addAll(['-c', '-g'])
         }
+
         externalNativeBuild {
             cmake {
                 abiFilters "armeabi-v7a","arm64-v8a"
                 arguments '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
             }
         }
-
     }
 
     buildTypes {
@@ -58,8 +64,8 @@ android {
     sourceSets {
         main {
             java.srcDirs    = ['src/main/java']
-            jni.srcDirs     = ['src/main/cpp/vr_setup']
-            jniLibs.srcDirs = ['libs/openxr_loader']
+            jni.srcDirs     = [cppAppPath]
+            jniLibs.srcDirs = [cppLoaderPath]
             manifest.srcFile 'src/main/AndroidManifest.xml'
         }
     }
@@ -73,5 +79,5 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs/openxr_loader', include: ['*.jar','*.aar'])
+    implementation fileTree(dir: cppLoaderPath, include: ['*.jar','*.aar'])
 }

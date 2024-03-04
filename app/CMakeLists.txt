@@ -20,20 +20,26 @@ add_definitions(-DXR_USE_GRAPHICS_API_VULKAN)
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
 
 
-file(GLOB LOCAL_HEADERS  "src/main/cpp/vr_setup/*.h")
-file(GLOB LOCAL_SOURCE   "src/main/cpp/vr_setup/*.cpp")
-file(GLOB VULKAN_SHADERS "src/main/cpp/vr_setup/vulkan_shaders/*.glsl")
+set(APP_NAME vr_setup)
+set(LOADER_NAME openxr_loader)
+set(APP_PATH src/main/cpp/${APP_NAME})
+set(LOADER_PATH libs/${LOADER_NAME})
 
-LINK_DIRECTORIES(libs/openxr_loader/${ANDROID_ABI})
-include_directories(libs/openxr_loader/include)
+
+file(GLOB LOCAL_HEADERS  "${APP_PATH}/*.h")
+file(GLOB LOCAL_SOURCE   "${APP_PATH}/*.cpp")
+file(GLOB VULKAN_SHADERS "${APP_PATH}/vulkan_shaders/*.glsl")
+
+LINK_DIRECTORIES(${LOADER_PATH}/${ANDROID_ABI})
+include_directories(${LOADER_PATH}/include)
 
 add_library( # Sets the name of the library.
-	vr_setup
+	${APP_NAME}
 	SHARED
 	${LOCAL_SOURCE}
 	${LOCAL_HEADERS}
 	${VULKAN_SHADERS}
-	libs/openxr_loader/include/common/gfxwrapper_opengl.c
+	${LOADER_PATH}/include/common/gfxwrapper_opengl.c
 )
 
 source_group("Headers" FILES ${LOCAL_HEADERS})
@@ -42,14 +48,14 @@ source_group("Shaders" FILES ${VULKAN_SHADERS})
 
 if(VulkanHeaders_INCLUDE_DIRS)
 	target_include_directories(
-		src/main/cpp/vr_setup
+		${APP_PATH}
 		PRIVATE
 		${VulkanHeaders_INCLUDE_DIRS}
 	)
 endif()
 
 if(Vulkan_LIBRARY)
-	target_link_libraries(src/main/cpp/vr_setup ${Vulkan_LIBRARY})
+	target_link_libraries(${APP_PATH} ${Vulkan_LIBRARY})
 endif()
 
 # Specifies libraries CMake should link to your target library. You
@@ -57,8 +63,8 @@ endif()
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-	vr_setup
-	openxr_loader
+	${APP_NAME}
+	${LOADER_NAME}
 	android
 	vulkan
 	EGL
