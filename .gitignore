@@ -1,3 +1,10 @@
+# // Copyright (C) 2024 Yucheng Liu. Under the GNU AGPL 3.0 License.
+# // GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
+
+# Handle patterns that start with a dot
+**/.*
+!**/.git*
+
 *.iml
 .gradle
 /local.properties
