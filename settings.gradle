@@ -1,20 +1,5 @@
 // Copyright (C) 2024 Yucheng Liu. Under the GNU AGPL 3.0 License.
 // GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-rootProject.name='VRSetupAndroid'
+rootProject.name='vr_setup_android_java'
 include ':app'

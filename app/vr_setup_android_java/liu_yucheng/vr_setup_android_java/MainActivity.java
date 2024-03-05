@@ -1,11 +1,11 @@
 // Copyright (C) 2024 Yucheng Liu. Under the GNU AGPL 3.0 License.
 // GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
-
+//
 // Copyright (c) 2017-2020 The Khronos Group Inc
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package com.LiuYucheng.VRSetupAndroid;
+package liu_yucheng.vr_setup_android_java;
 
 public class MainActivity extends android.app.NativeActivity {
   static {
@@ -14,6 +14,6 @@ public class MainActivity extends android.app.NativeActivity {
     // currently a way to specify a shared library dependency for NativeActivity
     // via the manifest meta-data.
     System.loadLibrary("openxr_loader");
-    System.loadLibrary("vr_setup");
+    System.loadLibrary("vr_setup_android_cpp");
   }
 }
