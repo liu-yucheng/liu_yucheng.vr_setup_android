@@ -1,4 +1,84 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '8.2.1' apply false
+// Copyright (C) 2024 Yucheng Liu. Under the GNU AGPL 3.0 License.
+// GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.application'
+
+def appPackageName = 'liu_yucheng.vr_setup_android_java'
+def appJavaName = 'vr_setup_android_java'
+def appCppName = 'vr_setup_android_cpp'
+def loaderName = 'openxr_loader'
+def appJavaPath = 'app/' + appJavaName
+def appCppPath = 'app/' + appCppName
+def loaderPath = 'libs/' + loaderName
+
+def appVersionCode = 5
+def appVersionName = '0.4.0-5'
+
+android {
+    namespace appPackageName
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
+
+    defaultConfig {
+        applicationId appPackageName
+        minSdkVersion 26
+        versionCode  appVersionCode
+        versionName  appVersionName
+
+        shaders {
+            glslcArgs.addAll(['-c', '-g'])
+        }
+
+        externalNativeBuild {
+            cmake {
+                abiFilters 'armeabi-v7a','arm64-v8a'
+                arguments '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+	
+    sourceSets {
+        main {
+            java.srcDirs    = [appJavaPath]
+            jni.srcDirs     = [appCppPath]
+            jniLibs.srcDirs = [loaderPath]
+            manifest.srcFile 'app/AndroidManifest.xml'
+        }
+    }
+	
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: loaderPath, include: ['*.jar','*.aar'])
 }
