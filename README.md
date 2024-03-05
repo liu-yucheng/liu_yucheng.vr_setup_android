@@ -1,4 +1,4 @@
-# VRSetupAndroid
+# vr_setup_android
 
 - An "empty" Android Studio project template for OpenXR Native VR development on Pico 4 Pro.
 
