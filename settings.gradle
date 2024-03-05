@@ -1,5 +1,5 @@
 // Copyright (C) 2024 Yucheng Liu. Under the GNU AGPL 3.0 License.
 // GNU AGPL 3.0 License available at: https://www.gnu.org/licenses/agpl-3.0.txt
 
-rootProject.name='vr_setup_android_java'
+rootProject.name='vr_setup_android'
 include ':app'

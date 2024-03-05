@@ -29,8 +29,8 @@ def appJavaPath = 'app/' + appJavaName
 def appCppPath = 'app/' + appCppName
 def loaderPath = 'libs/' + loaderName
 
-def appVersionCode = 5
-def appVersionName = '0.4.0-5'
+def appVersionCode = 6
+def appVersionName = '0.4.1-6'
 
 android {
     namespace appPackageName
